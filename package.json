@@ -1,0 +1,34 @@
+{
+  "name": "@botfi/detect-token-standard",
+  "version": "0.0.1",
+  "description": "Detect Token standards using onchain mechanism, currently supports ERC20, ERC721 & ERC1155 token detection",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/botfi-app/detect-token-standard.git"
+  },
+  "keywords": [
+    "web3",
+    "solidity",
+    "ethersjs",
+    "ethereum",
+    "bnbchain",
+    "basechain",
+    "avax",
+    "javascript",
+    "BotFi"
+  ],
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "ethers": "^6.7.1"
+  },
+  "author": "Big Zak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/botfi-app/detect-token-standard/issues"
+  },
+  "homepage": "https://github.com/botfi-app/detect-token-standard#readme"
+}
