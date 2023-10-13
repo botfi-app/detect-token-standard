@@ -4,9 +4,13 @@
  * @license MIT
  */ 
 
-import { getAddress, Contract as ethersContract, Fragment } from 'ethers'
+import { getAddress, Contract as ethersContract, id as ethersId } from 'ethers'
 
 export default class {
+
+    error(message) {
+        return { name: 'DTSError', message}
+    }
 
      /**
       * get proxy implementation address from storage
@@ -22,8 +26,7 @@ export default class {
     
 
     encodeSig(sig) {
-        let frag = new Fragment()
-        return this.web3Http.eth.abi.encodeFunctionSignature(sig)
+        return ethersId(sig).substring(0, 10);
     }
 
     /**
@@ -62,7 +65,7 @@ export default class {
             addr = await contract.implementation().call() 
             //console.log("addr===>", addr)
         } catch (e) {
-            Utils.logError("Wallet#getBeaconProxyImpl:", contractAddress)
+            console.log("Wallet#getBeaconProxyImpl:", contractAddress)
         }
 
         return addr
@@ -77,13 +80,15 @@ export default class {
     async getCode(contractAddress, proxyCheck = true) {
          
         if(!this.provider){
-            return this.notConnectedError()
+           throw this.error("Provider required")
         }
 
          
         let code = await this.provider.getCode(contractAddress);
 
-        if(code == '0x') return Status.error("Address not a contract")
+        if(code == '0x') {
+            return code
+        }
 
         let proxySlots = {
            "tranparent": "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc",
@@ -125,7 +130,7 @@ export default class {
             code = await this.provider.getCode(implAddress);
         }
         
-        return Status.successData(code)
+        return code
     }
 
     /**
@@ -134,8 +139,13 @@ export default class {
      * @param {*} code 
      * @returns 
      */
-    async hasMethod(signature, code) {
+    async hasMethod(contractAddr, signature, code) {
         const hash = this.encodeSig(signature);
+
+        if(!code || code.trim() == ''){
+            code = await this.getCode(contractAddr)
+        }
+
         return code.includes(hash.substring(2));
     }
 
