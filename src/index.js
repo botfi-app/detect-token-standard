@@ -5,6 +5,8 @@
  */ 
 
 import { getAddress, Contract as ethersContract, id as ethersId } from 'ethers'
+import { Buffer } from "buffer";
+import proxyBeaconImplAbi from "./data/proxy_beacon_impl_abi.json"
 
 export default class {
 

@@ -1,5 +1,5 @@
 {
-  "name": "@botfi/detect-token-standard",
+  "name": "@botfi/token-standard-detector",
   "version": "0.0.1",
   "description": "Detect Token standards using onchain mechanism, currently supports ERC20, ERC721 & ERC1155 token detection",
   "main": "src/index.js",
