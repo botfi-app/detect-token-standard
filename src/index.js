@@ -11,16 +11,16 @@ import proxyBeaconImplAbi from "./data/proxy_beacon_impl_abi.json"
 export default class {
 
     error(message) {
-        return { name: 'DTSError', message}
+        return { name: 'tsd_error', message}
     }
 
-     /**
-      * get proxy implementation address from storage
-      * @param {*} address 
-      * @param {*} slot 
-      * @returns 
-      */
-     async getProxyImplFromStorage(address, slot) {
+    /**
+     * get proxy implementation address from storage
+     * @param {*} address 
+     * @param {*} slot 
+     * @returns 
+     */
+    async getProxyImplFromStorage(address, slot) {
         ///let slot = "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc";
         let data = await this.provider.getStorageAt(address, slot);
         return this.parseAddressFromStorage(data)
@@ -67,7 +67,7 @@ export default class {
             addr = await contract.implementation().call() 
             //console.log("addr===>", addr)
         } catch (e) {
-            console.log("Wallet#getBeaconProxyImpl:", contractAddress)
+            console.log("getBeaconProxyImpl:", contractAddress)
         }
 
         return addr
