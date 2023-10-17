@@ -189,7 +189,7 @@ export default class {
         }
             
         for (let method of methodsArray) {
-            let hasMethod = await this.hasMethod(method, code)
+            let hasMethod = await this.hasMethod(contractAddress, method, code)
                 if (!hasMethod) {
                 return false;
             }
